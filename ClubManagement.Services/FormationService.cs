@@ -1,5 +1,7 @@
 ﻿using ClubManagement.Entities;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using System.Collections.Generic;
 
 namespace ClubManagement.Services
 {
@@ -16,6 +18,12 @@ namespace ClubManagement.Services
         {
             _context._formations.InsertOne(formation);
             return formation;
+        }
+
+        public List<Formation> GetListFormations()
+        {
+            var result = _context._formations.Find(Builders<Formation>.Filter.Empty).ToList();
+            return result;
         }
     }
 }

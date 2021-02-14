@@ -2,6 +2,7 @@
 using ClubManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace FormationManagement.Controllers
 {
@@ -32,6 +33,21 @@ namespace FormationManagement.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet]
+        public IActionResult GetList()
+        {
+            try
+            {
+                List<Formation> List = _formationService.GetListFormations();
+                return Ok(List);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }
