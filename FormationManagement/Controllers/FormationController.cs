@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace FormationManagement.Controllers
 {
-    [Route("api/[controller]/[action]")]  
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class FormationController : ControllerBase
     {
@@ -48,6 +48,20 @@ namespace FormationManagement.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [HttpGet("{idFormation}")]
+        public IActionResult Get(string idFormation)
+        {
+            try
+            {
+                Formation formation = _formationService.GetFormationById(idFormation);
+                return Ok(formation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

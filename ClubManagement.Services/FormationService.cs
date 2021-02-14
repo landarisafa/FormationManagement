@@ -20,6 +20,13 @@ namespace ClubManagement.Services
             return formation;
         }
 
+        public Formation GetFormationById(string idFormation)
+        {
+            var filter = Builders<Formation>.Filter.Eq(x => x.Id, idFormation);
+            var result = _context._formations.Find(filter).FirstOrDefault();
+            return result;
+        }
+
         public List<Formation> GetListFormations()
         {
             var result = _context._formations.Find(Builders<Formation>.Filter.Empty).ToList();
