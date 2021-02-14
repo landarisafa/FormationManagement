@@ -3,6 +3,7 @@ using ClubManagement.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace FormationManagement.Controllers
 {
@@ -62,6 +63,36 @@ namespace FormationManagement.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Formation formationToUpdate)
+        {
+            try
+            {
+                Formation formation = await _formationService.UpdateFormation(formationToUpdate);
+                return Ok(formation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpDelete("{idFormation}")]
+        public IActionResult Delete(string idFormation)
+        {
+            try
+            {
+                Formation formation = _formationService.DeleteFormation(idFormation);
+                return Ok(formation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

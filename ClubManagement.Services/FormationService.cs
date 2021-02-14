@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ClubManagement.Services
 {
@@ -30,6 +31,19 @@ namespace ClubManagement.Services
         public List<Formation> GetListFormations()
         {
             var result = _context._formations.Find(Builders<Formation>.Filter.Empty).ToList();
+            return result;
+        }
+
+        public async Task<Formation> UpdateFormation(Formation formation)
+        {
+            FilterDefinition<Formation> filter = Builders<Formation>.Filter.Eq(x => x.Id, formation.Id);
+            Formation result = await _context._formations.FindOneAndReplaceAsync(filter, formation);
+            return result;
+        }
+
+        public Formation DeleteFormation(string idFormation)
+        {
+            Formation result = _context._formations.FindOneAndDelete(x => x.Id == idFormation);
             return result;
         }
     }
