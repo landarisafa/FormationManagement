@@ -14,6 +14,6 @@ namespace ClubManagement.Entities
         public int NbHours { get; set; }
         public DateTime DateStart { get; set; }
         public DateTime DateEnd { get; set; }
-        public List<string> Technologies { get; set; }
+        public string Technologies { get; set; }
     }
 }

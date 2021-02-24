@@ -36,6 +36,11 @@ namespace FormationManagement
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder
+             .AllowAnyOrigin()
+             .AllowAnyHeader()
+             .AllowAnyMethod());
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
